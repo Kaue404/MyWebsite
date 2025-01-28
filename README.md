@@ -15,8 +15,7 @@ Welcome to my personal portfolio! This website was developed to showcase my skil
 1. **Home**: Brief introduction and call to action.
 2. **About Me**: Personal information, academic background, and interests.
 3. **Projects**: Gallery of the most relevant projects, with descriptions and links to demos or repositories.
-4. **Skills**: List of my technical skills and tools I use.
-5. **Contact**: Contact form and links to my social media and professional profiles.
+4. **Contact**: Contact form and links to my social media and professional profiles.
 
 ## 📜 License 📜
 
