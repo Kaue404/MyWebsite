@@ -18,10 +18,10 @@ const Theme = createTheme({
     },
     divider: '#262626',
     background: {
-      default: '#f2f2f2',
+      default: '#121212',
     },
     text: {
-      primary: '#000000',
+      primary: '#f1f1f1',
     },
   },
   typography: {
