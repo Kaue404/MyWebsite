@@ -1,7 +1,9 @@
 'use client';
 
 import HeaderComponent from './components/header';
+import Image from 'next/image';
 import React from 'react';
+import { TypeAnimation } from 'react-type-animation';
 import { Typography } from '@mui/material';
 
 export default function Page() {
@@ -17,19 +19,49 @@ export default function Page() {
       </div>
 
       <div style={{
-        position: 'relative',
         display: 'flex',
-        flexDirection: 'column', // Altera a direção do flex para column
-        alignItems: 'center', // Centraliza os itens horizontalmente
-        marginTop: '7rem',
+        flexDirection: 'column',
+        alignItems: 'center',
         justifyContent: 'center',
+        height: '100vh', 
+        textAlign: 'center',
+        gap: '2rem',
+        padding: '1rem',
       }}>
-        <Typography variant="h1">
-          Kauê José Abdalla Leal
+        <Typography 
+          sx={{ 
+            fontSize: '3.5rem' }} 
+          variant="h1">
+          <TypeAnimation
+            sequence={[
+              'Olá, Bem vindo ao meu Portifólio WebSite',
+              1000,
+            ]}
+            wrapper="span"
+            speed={50}
+            style={{ display: 'inline-block' }}
+            repeat={0} 
+          />
         </Typography>
-        <Typography sx={{ color: '#64337E' }} variant="h2">
-          Desenvolvedor Full-Stack
-        </Typography>
+
+        <div
+          style={{
+            opacity: 0.2,
+            transition: 'opacity 1.5s ease-in-out',
+            position: 'absolute', 
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            zIndex: -1,
+          }}>
+          <Image
+            src="/images/Background.jpg"
+            alt="Fundo"
+            fill
+            objectFit="cover"
+          />
+        </div>
       </div>
     </>
   );

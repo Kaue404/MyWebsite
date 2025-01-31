@@ -3,14 +3,13 @@ import {
   Button,
   Drawer, 
   IconButton, 
+  Typography, 
   useMediaQuery, 
 } from '@mui/material';
 import React, { useState } from 'react';
 import Grid from '@mui/material/Grid2';
-import Image from 'next/image';
 import Link from 'next/link';
 import LinkComponent from './link';
-import Logo from '../../public/images/Logo.png';
 import MenuIcon from '@mui/icons-material/Menu';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../styles/theme/Theme';
@@ -62,32 +61,20 @@ const HeaderComponent = () => {
             justifyContent: 'space-between',
           }}
         >
-          <Link href='/'>
-            <Image
-              src={Logo}
-              alt='Logo'
-              layout='intrinsic'
-              width={(() => {
-                if (isXSmallScreen) return 90;
-                if (isSmallScreen) return 95;
-                if (isMediumScreen && !isSmallScreen) return 100;
-                if (isLargeScreen && !isMediumScreen) return 120;
-                if (isXLargeScreen && !isLargeScreen) return 126;
-                return 127.17;
-              })()}
-              height={(() => {
-                if (isXSmallScreen) return 15;
-                if (isSmallScreen) return 20;
-                if (isMediumScreen && !isSmallScreen) return 25;
-                if (isLargeScreen && !isMediumScreen) return 30;
-                if (isXLargeScreen && !isLargeScreen) return 36;
-                return 36.33;
-              })()}
-              style={{
-                maxWidth: '100%',
-                height: 'auto',
-              }}
-            />
+          <Link style={{textDecoration: 'none'}} href='/'>
+            <Typography sx={{
+              fontSize: '2rem',
+              fontWeight: '600',
+              transition: '0.5s ease, color 0.5s ease',
+              '&:hover': {
+                color: 'white',
+              },
+              '&:active': {
+                color: '#D68BB4', 
+              },
+            }}>
+              Kauê
+            </Typography>
           </Link>
   
           {isMediumScreen ? (
@@ -164,7 +151,7 @@ const HeaderComponent = () => {
               </LinkComponent>
               <Button
                 sx={{
-                  backgroundImage: 'linear-gradient(45deg, #D68BB4, #64337E)',
+                  backgroundColor: '#64337E',
                   color: 'white',
                   paddingInline: 2,
                   borderRadius: 5,
@@ -172,15 +159,13 @@ const HeaderComponent = () => {
                   fontSize: '0.8rem',
                   transition: 
                   // eslint-disable-next-line @stylistic/max-len
-                  'background-image 0.5s ease, background-color 0.5s ease, color 0.5s ease',
+                  'background-color 0.5s ease, background-color 0.5s ease, color 0.5s ease',
                   '&:hover': {
-                    backgroundImage: 'none', 
                     backgroundColor: '#D68BB4',
                     color: 'white',
                   },
                   '&:active': {
                     backgroundColor: '#64337E', 
-                    backgroundImage: 'none',
                   },
                 }}
               >
