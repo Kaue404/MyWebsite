@@ -1,12 +1,17 @@
 'use client';
 
+import { Typography, useMediaQuery } from '@mui/material';
 import HeaderComponent from './components/header';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { TypeAnimation } from 'react-type-animation';
-import { Typography } from '@mui/material';
+import theme from './styles/theme/Theme';
 
 export default function Page() {
+
+  const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
     <>
       <div style={{
@@ -30,7 +35,7 @@ export default function Page() {
       }}>
         <Typography 
           sx={{ 
-            fontSize: '3.5rem' }} 
+            fontSize: isMediumScreen ? '2rem' : '3.5rem' }} 
           variant="h1">
           <TypeAnimation
             sequence={[
@@ -43,7 +48,6 @@ export default function Page() {
             repeat={0} 
           />
         </Typography>
-
         <div
           style={{
             opacity: 0.2,
@@ -62,7 +66,18 @@ export default function Page() {
             objectFit="cover"
           />
         </div>
+        <Link style={{textDecoration: 'none'}}
+          href='/projetos'>
+          <Typography 
+            sx={{ 
+              color: 'white',
+              fontSize: isMediumScreen ? '1.5rem' : '2rem' }} 
+            variant="h5">
+            Conheça meus projetos
+          </Typography>
+        </Link>
       </div>
+      
     </>
   );
 }

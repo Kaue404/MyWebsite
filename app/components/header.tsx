@@ -59,8 +59,7 @@ const HeaderComponent = () => {
             })(),
             alignItems: 'center',
             justifyContent: 'space-between',
-          }}
-        >
+          }}>
           <Link style={{textDecoration: 'none'}} href='/'>
             <Typography sx={{
               fontSize: '2rem',
@@ -105,16 +104,16 @@ const HeaderComponent = () => {
                       gap: 2,
                       borderRadius: 0,
                     }}>
-                    <LinkComponent isActive href='/sobre'>
+                    <LinkComponent isActive href='/'>
                         Home
                     </LinkComponent>
-                    <LinkComponent isActive href='/produtos'>
+                    <LinkComponent isActive href='/sobre'>
                         Sobre
                     </LinkComponent>
-                    <LinkComponent isActive href='/'>
+                    <LinkComponent isActive href='/contato'>
                         Contato
                     </LinkComponent>
-                    <LinkComponent isActive href='/'>
+                    <LinkComponent isActive href='/projetos'>
                         Meus Projetos
                     </LinkComponent>
                   </Box>
@@ -141,12 +140,12 @@ const HeaderComponent = () => {
               </LinkComponent>
               <LinkComponent 
                 isActive 
-                href='/'>
+                href='/sobre'>
                   Sobre
               </LinkComponent>
               <LinkComponent
                 isActive
-                href='/'>
+                href='/contato'>
                   Contato
               </LinkComponent>
               <Button
@@ -167,9 +166,8 @@ const HeaderComponent = () => {
                   '&:active': {
                     backgroundColor: '#64337E', 
                   },
-                }}
-              >
-  Meus Projetos
+                }}>
+                Meus Projetos
               </Button>
             </Grid>
           )}
