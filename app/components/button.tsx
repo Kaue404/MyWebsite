@@ -47,8 +47,7 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
           backgroundColor: '#64337E', 
         },
       }}
-      {...props}
-    >
+      {...props}>
       {children}
     </Button>
   );
