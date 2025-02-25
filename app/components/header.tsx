@@ -149,6 +149,7 @@ const HeaderComponent = () => {
                   Contato
               </LinkComponent>
               <Button
+                href='/projetos'
                 sx={{
                   backgroundColor: '#64337E',
                   color: 'white',
