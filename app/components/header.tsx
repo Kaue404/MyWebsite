@@ -62,6 +62,7 @@ const HeaderComponent = () => {
           }}>
           <Link style={{textDecoration: 'none'}} href='/'>
             <Typography sx={{
+              color: '#64337E',
               fontSize: '2rem',
               fontWeight: '600',
               transition: '0.5s ease, color 0.5s ease',
