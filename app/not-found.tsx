@@ -1,5 +1,7 @@
-import { Button, Container, Typography } from '@mui/material';
-import Link from 'next/link';
+'use client';
+
+import { Container, Typography } from '@mui/material';
+import Button from './components/button';
 import React from 'react';
 
 const Custom404: React.FC = () => {
@@ -24,11 +26,9 @@ const Custom404: React.FC = () => {
         A página que você está procurando
         pode ter sido removida ou não está disponível.
       </Typography>
-      <Link href="/" passHref>
-        <Button variant="contained" color="primary">
+      <Button href="/">
           Voltar para a página inicial
-        </Button>
-      </Link>
+      </Button>
     </Container>
   );
 };

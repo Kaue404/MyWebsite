@@ -1,3 +1,5 @@
+'use client';
+
 import { Button, ButtonProps } from '@mui/material';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import React from 'react';
@@ -40,7 +42,7 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
         boxShadow: 'none', 
         ...sx,
         '&:hover': {
-          backgroundColor: '#9063CD', 
+          backgroundColor: '#D68BB4',
           color: 'white',
         },
         '&:active': {

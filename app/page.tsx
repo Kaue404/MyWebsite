@@ -1,9 +1,9 @@
 'use client';
 
-import { Typography, useMediaQuery } from '@mui/material';
+import {Typography, useMediaQuery } from '@mui/material';
+import Button from './components/button';
 import HeaderComponent from './components/header';
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import theme from './styles/theme/Theme';
@@ -66,16 +66,9 @@ export default function Page() {
             objectFit="cover"
           />
         </div>
-        <Link style={{textDecoration: 'none'}}
-          href='/projetos'>
-          <Typography 
-            sx={{ 
-              color: 'white',
-              fontSize: isMediumScreen ? '1.5rem' : '2rem' }} 
-            variant="h5">
+        <Button href='/projetos'>
             Conheça meus projetos
-          </Typography>
-        </Link>
+        </Button>
       </div>
       
     </>
