@@ -2,6 +2,7 @@
 
 import { Container, Typography } from '@mui/material';
 import Button from './components/button';
+import Image from 'next/image';
 import React from 'react';
 
 const Custom404: React.FC = () => {
@@ -15,6 +16,23 @@ const Custom404: React.FC = () => {
         height: '100vh',
         textAlign: 'center',
       }}>
+      <div
+        style={{
+          opacity: 0.2,
+          position: 'absolute', 
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: -1,
+        }}>
+        <Image
+          src="/images/Background.jpg"
+          alt="Fundo"
+          fill
+          objectFit="cover"
+        />
+      </div>
       <Typography variant="h1" 
         sx={{ fontSize: '4rem', fontWeight: 'bold', mb: 2 }}>
         404

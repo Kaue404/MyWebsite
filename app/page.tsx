@@ -3,7 +3,6 @@
 import {Typography, useMediaQuery } from '@mui/material';
 import Button from './components/button';
 import HeaderComponent from './components/header';
-import Image from 'next/image';
 import React from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import theme from './styles/theme/Theme';
@@ -48,24 +47,6 @@ export default function Page() {
             repeat={0} 
           />
         </Typography>
-        <div
-          style={{
-            opacity: 0.2,
-            transition: 'opacity 1.5s ease-in-out',
-            position: 'absolute', 
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            zIndex: -1,
-          }}>
-          <Image
-            src="/images/Background.jpg"
-            alt="Fundo"
-            fill
-            objectFit="cover"
-          />
-        </div>
         <Button href='/projetos'>
             Conheça meus projetos
         </Button>
