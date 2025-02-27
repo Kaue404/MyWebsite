@@ -67,6 +67,7 @@ export default function Page() {
         display: 'flex',
         flexDirection: isMediumScreen ? 'column' : 'row',
         marginTop: '7rem',
+        marginBottom: '3rem',
         alignItems: 'start',
         justifyContent: 'start',
         height: '100%', 
@@ -161,9 +162,8 @@ export default function Page() {
         </div>
       </div>
 
-
       <div style={{
-        marginInline: isMediumScreen ?'2rem' : '5.2rem',
+        marginInline: isMediumScreen ?'2rem' : '8rem',
         flexDirection: 'column',
         display: 'flex',
         justifyContent: 'center',
@@ -178,13 +178,48 @@ export default function Page() {
             textAlign:'center' }}>
             Minha História e meus Principais Hobbies
         </Typography>
-        <Typography variant='body1' sx={{ mb: '1rem', textAlign:'justify' }}>
-              Eu vivi minha vida inteira em Franca-SP, desde criança, eu gostava
+        <Typography variant='body1' 
+          sx={{ mb: 1, textAlign:'justify', textIndent: '30px' }}>
+            Nasci no dia 12/03/2005, tenho olhos castanhos, cabelo enrolado
+            preto e com 1,90 de altura, gosto de comer sushi e lasanha,
+            minhas cores favoritas são preto e roxo (acho que da pra perceber 
+            pelo site), gosto de ouvir Rock, Trap e Rap e sou uma pessoa 
+            calma e brincalhona, que é mais de ficar em casa e ficar tranquilo.
+            Eu vivi minha vida inteira em Franca-SP e desde criança eu gostava
             muito de jogar em sites e assistir vídeos na internet, jogava
             aqueles joguinhos de flash, mesmo tendo um ps1 no quarto e assistia 
             alguns youtubers. Quando fiquei um pouco mais velho, pedi para minha
             Mãe um outro vídeogame, na época ganhei um xbox360 e com ele, joguei
-            muito com meu primo e sozinho em casa.
+            muito com meu primo e sozinho em casa. Foi dai que surgiu minha 
+            atração por tecnologia, decidi fazer um curso de inglês por 5 anos e
+            entrar para área de tecnologia em uma faculdade. 
+        </Typography>
+        <Typography variant='body1' 
+          sx={{ mb: 1, textAlign:'justify', textIndent: '30px' }}>
+            Meu primeiro trabalho foi em uma pequena empresa sendo técnico 
+            eletrônico, lá eu sofri um pouquinho mas de resto foi tranquilo, 
+            depois de um tempo eu entrei para a Lev Negócios, como estágiário em
+            Suporte de Operações, depois de alguns meses eu troquei para a área
+            de TI da empresa sendo estagiário Full Stack e atualmente estou
+            efetivado na mesma, fazendo papel tanto de Full Stack quanto de 
+            Front End.
+        </Typography>
+        <Typography variant='body1' 
+          sx={{ textAlign:'justify', textIndent: '30px' }}>
+              Em relação aos jogos, meu jogo preferido é Spider-Man de ps4, até
+            porque ele também é meu herói preferido, meu gênero de jogo
+            preferido é RPG e o meu verdadeiro sonho nessa área é poder 
+            desenvolver meu próprio jogo, criando desde o ínicio até o final do 
+            desenvolvimento. Acredito que jogos são uma verdadeira arte
+            em todos os sentidos e acredito também que seja a maneira mais fácil
+            de se expressar por meio dela, até porque um jogo tem música, tem
+            cenas cinematográficas, há uma história e você tem o controle sobre 
+            ela.
+        </Typography>
+        <Typography variant='body1' 
+          sx={{ mb: 4, textAlign:'justify' }}>
+            Caso tenha interesse em conversar comigo, acesse minhas redes 
+            sociais.
         </Typography>
       </div>
 
