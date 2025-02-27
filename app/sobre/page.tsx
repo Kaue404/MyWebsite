@@ -161,6 +161,33 @@ export default function Page() {
         </div>
       </div>
 
+
+      <div style={{
+        marginInline: isMediumScreen ?'2rem' : '5.2rem',
+        flexDirection: 'column',
+        display: 'flex',
+        justifyContent: 'center',
+        padding: '1rem',
+      }}>
+        <Typography variant='h2' 
+          sx={{ 
+            fontSize: isMediumScreen ? '1.7rem' : '2rem',
+            fontWeight: 'bold', 
+            mb: '1rem', 
+            color: '#64337E', 
+            textAlign:'center' }}>
+            Minha História e meus Principais Hobbies
+        </Typography>
+        <Typography variant='body1' sx={{ mb: '1rem', textAlign:'justify' }}>
+              Eu vivi minha vida inteira em Franca-SP, desde criança, eu gostava
+            muito de jogar em sites e assistir vídeos na internet, jogava
+            aqueles joguinhos de flash, mesmo tendo um ps1 no quarto e assistia 
+            alguns youtubers. Quando fiquei um pouco mais velho, pedi para minha
+            Mãe um outro vídeogame, na época ganhei um xbox360 e com ele, joguei
+            muito com meu primo e sozinho em casa.
+        </Typography>
+      </div>
+
       <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
         <FooterComponent />
       </div>
