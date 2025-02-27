@@ -9,6 +9,7 @@ import { Box,
   Typography,
   useMediaQuery } 
   from '@mui/material';
+import FooterComponent from '../components/footer';
 import HeaderComponent from '../components/header';
 import React from 'react';
 import theme from '../styles/theme/Theme';
@@ -28,7 +29,7 @@ const steps = [
     - Técnico Eletrônico: Hayabusa Produções`,
   },
   {
-    label: '2025',
+    label: '2025 - Atualmente',
     description: `- Desenvolvedor Front End e Full Stack: Lev Negócios <br /> 
     - Diploma de Tecnólogo e Certificações em DSM: FATEC`,
   },
@@ -96,6 +97,15 @@ export default function Page() {
             na empresa Lev Negócios sendo full stack e front end também, 
             utilizando várias ferramentas e frameworks.
           </Typography>
+          <Typography variant='h2' 
+            sx={{ 
+              fontSize: isMediumScreen ? '1.7rem' : '2rem',
+              fontWeight: 'bold', 
+              mb: '1rem', 
+              color: '#64337E', 
+              textAlign:'left' }}>
+            Jornada:
+          </Typography>
           <Box sx={{ maxWidth: 600 }}>
             <Stepper 
               activeStep={activeStep} 
@@ -149,6 +159,10 @@ export default function Page() {
               objectFit: 'fill',
             }}/>
         </div>
+      </div>
+
+      <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
+        <FooterComponent />
       </div>
     </>
   );

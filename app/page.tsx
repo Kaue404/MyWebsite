@@ -1,7 +1,9 @@
 'use client';
 
 import {Typography, useMediaQuery } from '@mui/material';
+import { ArrowForward } from '@mui/icons-material';
 import Button from './components/button';
+import FooterComponent from './components/footer';
 import HeaderComponent from './components/header';
 import React from 'react';
 import { TypeAnimation } from 'react-type-animation';
@@ -48,10 +50,14 @@ export default function Page() {
           />
         </Typography>
         <Button href='/projetos'>
-            Conheça meus projetos
+          Conheça meus projetos 
+          <ArrowForward sx={{ marginLeft: '8px'}}/>
         </Button>
       </div>
-      
+
+      <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
+        <FooterComponent />
+      </div>
     </>
   );
 }

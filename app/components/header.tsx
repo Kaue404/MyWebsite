@@ -47,7 +47,6 @@ const HeaderComponent = () => {
             height: '6rem',
             backgroundColor: '#121212', 
             borderRadius: 0,
-            boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.25)',
             display: 'flex',
             paddingInline: (() => {
               if (isXSmallScreen) return '0px';

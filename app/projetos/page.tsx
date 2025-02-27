@@ -1,5 +1,6 @@
 'use client';
 
+import FooterComponent from '../components/footer';
 import HeaderComponent from '../components/header';
 import React from 'react';
 
@@ -29,6 +30,10 @@ export default function Page() {
         EM BREVE!
       </div>
       
+
+      <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
+        <FooterComponent />
+      </div>
     </>
   );
 }
