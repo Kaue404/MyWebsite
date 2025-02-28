@@ -11,6 +11,7 @@ import { Box,
   from '@mui/material';
 import FooterComponent from '../components/footer';
 import HeaderComponent from '../components/header';
+import Link from '../components/link';
 import React from 'react';
 import theme from '../styles/theme/Theme';
 
@@ -216,11 +217,19 @@ export default function Page() {
             cenas cinematográficas, há uma história e você tem o controle sobre 
             ela.
         </Typography>
-        <Typography variant='body1' 
-          sx={{ mb: 4, textAlign:'justify' }}>
+        <div style={{display: 'flex'}}>
+          <Typography variant='body1' 
+            sx={{ mb: 4, textAlign:'justify' }}>
             Caso tenha interesse em conversar comigo, acesse minhas redes 
-            sociais.
-        </Typography>
+            sociais, ou a página de
+          </Typography>
+          <Link sx={{
+            height: '100%',
+            marginLeft: '6px',
+          }} href='/contato'>
+            Contato
+          </Link>
+        </div>
       </div>
 
       <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
