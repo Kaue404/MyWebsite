@@ -164,6 +164,7 @@ export default function Page() {
       </div>
 
       <div style={{
+        marginBottom: '4rem',
         marginInline: isMediumScreen ?'2rem' : '8rem',
         flexDirection: 'column',
         display: 'flex',
@@ -230,6 +231,26 @@ export default function Page() {
               Contato
           </Link>
         </div>
+      </div>
+
+      <div style={{ 
+        marginBottom: '2rem',
+        position: 'relative',
+        justifyContent: 'center',
+        display: 'flex', 
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        width: '100%',
+        textAlign: 'center',
+      }}>
+        <Typography variant='body1' 
+          sx={{ textAlign: 'center', marginRight: '6px' }}>
+            Link do site no GitHub:
+        </Typography>
+        <Link sx={{ whiteSpace: 'nowrap' }} 
+          href='https://github.com/Kaue404/MyWebsite'>
+            https://github.com/Kaue404/MyWebsite
+        </Link>
       </div>
 
       <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
