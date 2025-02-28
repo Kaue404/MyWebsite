@@ -1,5 +1,5 @@
 'use client';
-
+import './styles/globals.css';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import Head from 'next/head';
 import React from 'react';

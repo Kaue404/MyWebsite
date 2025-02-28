@@ -217,17 +217,17 @@ export default function Page() {
             cenas cinematográficas, há uma história e você tem o controle sobre 
             ela.
         </Typography>
-        <div style={{display: 'flex'}}>
+        <div style={{ 
+          display: 'inline-flex', 
+          alignItems: 'baseline', 
+          flexWrap: 'wrap' }}>
           <Typography variant='body1' 
-            sx={{ mb: 4, textAlign:'justify' }}>
-            Caso tenha interesse em conversar comigo, acesse minhas redes 
-            sociais, ou a página de
+            sx={{ textAlign: 'justify', marginRight: '6px' }}>
+              Caso tenha interesse em conversar comigo, 
+              acesse minhas redes sociais, ou a página de
           </Typography>
-          <Link sx={{
-            height: '100%',
-            marginLeft: '6px',
-          }} href='/contato'>
-            Contato
+          <Link sx={{ whiteSpace: 'nowrap' }} href='/contato'>
+              Contato
           </Link>
         </div>
       </div>
