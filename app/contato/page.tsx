@@ -1,8 +1,10 @@
 'use client';
 
 import { 
+  Alert,
   Box, 
   Button, 
+  Snackbar, 
   TextField, 
   Typography, 
   useMediaQuery} from '@mui/material';
@@ -19,9 +21,23 @@ export default function Page() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+
+  const MAX_NAME_LENGTH = 50;
+  const MAX_EMAIL_LENGTH = 100;
+  const MAX_MESSAGE_LENGTH = 500;
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (name.length > MAX_NAME_LENGTH || 
+      email.length > MAX_EMAIL_LENGTH || 
+      message.length > MAX_MESSAGE_LENGTH) {
+      setSnackbarMessage('Um ou mais campos excederam o limite de caracteres.');
+      setOpenSnackbar(true);
+      return;
+    }
+
     const mensagemWhatsApp = `Nome: ${name}\nEmail: ${email}\n ${message}`;
     const mensagemCodificada = encodeURIComponent(mensagemWhatsApp);
     const numeroTelefone = '5516999733423';
@@ -33,6 +49,11 @@ export default function Page() {
     setEmail('');
     setMessage('');
   };
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
+
 
   return (
     <>
@@ -47,7 +68,7 @@ export default function Page() {
 
       <div
         style={{
-          marginTop: '2rem',
+          marginTop: '3rem',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -57,7 +78,6 @@ export default function Page() {
           padding: '1rem',
           width: '100%',
         }}>
-
         <Box
           component="form"
           onSubmit={handleSubmit}
@@ -93,6 +113,8 @@ export default function Page() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            inputProps={{ maxLength: MAX_NAME_LENGTH }}
+            helperText={`${name.length}/${MAX_NAME_LENGTH}`}
             sx={{
               '& .MuiOutlinedInput-root': {
                 '& fieldset': {
@@ -108,6 +130,9 @@ export default function Page() {
               '& .MuiOutlinedInput-input': {
                 color: 'white',
               },
+              '& .MuiFormHelperText-root': {
+                color: 'white',
+              },
             }}
             fullWidth/>
           <TextField
@@ -117,6 +142,8 @@ export default function Page() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            inputProps={{ maxLength: MAX_EMAIL_LENGTH }}
+            helperText={`${email.length}/${MAX_EMAIL_LENGTH}`}
             sx={{
               '& .MuiOutlinedInput-root': {
                 '& fieldset': {
@@ -132,6 +159,9 @@ export default function Page() {
               '& .MuiOutlinedInput-input': {
                 color: 'white',
               },
+              '& .MuiFormHelperText-root': {
+                color: 'white',
+              },
             }}
             fullWidth/>
           <TextField
@@ -142,6 +172,8 @@ export default function Page() {
             required
             multiline
             rows={4}
+            inputProps={{ maxLength: MAX_MESSAGE_LENGTH }}
+            helperText={`${message.length}/${MAX_MESSAGE_LENGTH}`}
             sx={{
               '& .MuiOutlinedInput-root': {
                 '& fieldset': {
@@ -155,6 +187,9 @@ export default function Page() {
                 color: 'white',
               },
               '& .MuiOutlinedInput-input': {
+                color: 'white',
+              },
+              '& .MuiFormHelperText-root': {
                 color: 'white',
               },
             }}
@@ -171,11 +206,27 @@ export default function Page() {
               backgroundColor: '#64337E', 
             },
           }}
+          disabled={name.length > 
+          MAX_NAME_LENGTH || 
+          email.length > MAX_EMAIL_LENGTH || 
+          message.length > MAX_MESSAGE_LENGTH}
           variant='contained' type='submit'>
             Enviar
           </Button>
         </Box>
       </div>
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+        <Alert onClose={handleCloseSnackbar} 
+          severity="error" 
+          sx={{ width: '100%' }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
 
       <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
         <FooterComponent />
