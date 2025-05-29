@@ -17,29 +17,30 @@ const LinkComponent: React.FC<LinkComponentProps> = ({
   sx,
   ...props
 }) => {
+  const [hovered, setHovered] = React.useState(false);
+
+  const getColor = () => {
+    if (hovered) return isActive ? '#64337E' : '#808080';
+    return isActive ? '#F1F1F1' : '#64337E';
+  };
+
   return (
-    <Link href={href} {...props} legacyBehavior passHref>
-      <a
-        className={clsx({ active: isActive })}
-        style={{
-          textDecoration: isActive ? 'none' : 'none',
-          color: isActive ? '#F1F1F1' : '#64337E',
-          fontWeight: isActive ? '500' : '500',
-          fontFamily: 'Montserrat',
-          transition: 'color 0.3s ease', 
-          ...((sx as React.CSSProperties) || {}),
-        }}
-        onMouseEnter={(e) => {
-          (e.target as HTMLElement).style.color = 
-          isActive ? '#64337E' : '#808080';
-        }}
-        onMouseLeave={(e) => {
-          (e.target as HTMLElement).style.color = 
-          isActive ? '#F1F1F1' : '#64337E';
-        }}
-      >
-        {children}
-      </a>
+    <Link
+      href={href}
+      className={clsx({ active: isActive })}
+      style={{
+        textDecoration: 'none',
+        color: getColor(),
+        fontWeight: '500',
+        fontFamily: 'Montserrat',
+        transition: 'color 0.3s ease',
+        ...((sx as React.CSSProperties) || {}),
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      {...props}
+    >
+      {children}
     </Link>
   );
 };

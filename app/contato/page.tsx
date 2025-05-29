@@ -11,6 +11,7 @@ import {
 import React, { useState } from 'react';
 import FooterComponent from '../components/footer';
 import HeaderComponent from '../components/header';
+import ParticlesBackground from '../components/particlesBackground';
 import theme from '../styles/theme/Theme';
 
 export default function Page() {
@@ -57,10 +58,11 @@ export default function Page() {
 
   return (
     <>
+      <ParticlesBackground />
       <div style={{
         position: 'fixed',
         width: '100%',
-        zIndex: 10,
+        zIndex: 1000,
         top: 0,
       }}>
         <HeaderComponent />
@@ -74,9 +76,11 @@ export default function Page() {
           alignItems: 'center',
           justifyContent: 'center',
           gap: '2rem',
-          height: '100vh',
+          minHeight: '100vh',
           padding: '1rem',
           width: '100%',
+          position: 'relative',
+          zIndex: 1,
         }}>
         <Box
           component="form"
@@ -91,10 +95,11 @@ export default function Page() {
             boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
             borderRadius: '10px',
             padding: '16px',
-            backgroundColor: '#1E1E1E',
+            backgroundColor: 'rgba(30,30,30,0.9)',
             display: 'flex',
             flexDirection: 'column',
             gap: '1rem',
+            position: 'relative',
           }}>
           <Typography 
             sx={{
@@ -118,9 +123,6 @@ export default function Page() {
             sx={{
               '& .MuiOutlinedInput-root': {
                 '& fieldset': {
-                  borderColor: 'white',
-                },
-                '&:hover fieldset': {
                   borderColor: 'white',
                 },
               },
@@ -149,9 +151,6 @@ export default function Page() {
                 '& fieldset': {
                   borderColor: 'white', 
                 },
-                '&:hover fieldset': {
-                  borderColor: 'white',
-                },
               },
               '& .MuiInputLabel-root': {
                 color: 'white',
@@ -177,9 +176,6 @@ export default function Page() {
             sx={{
               '& .MuiOutlinedInput-root': {
                 '& fieldset': {
-                  borderColor: 'white',
-                },
-                '&:hover fieldset': {
                   borderColor: 'white',
                 },
               },
@@ -228,7 +224,13 @@ export default function Page() {
         </Alert>
       </Snackbar>
 
-      <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
+      <div style={{
+        display: 'flex', 
+        flexDirection: 'column', 
+        height: '100%',
+        position: 'relative',
+        zIndex: 1,
+      }}>
         <FooterComponent />
       </div>
     </>

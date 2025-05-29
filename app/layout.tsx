@@ -18,6 +18,7 @@ export default function RootLayout({
       <ThemeProvider theme={Theme}>
         <CssBaseline />
         <html lang='pt-br'>
+          <title>Meu Portfólio - Kauê</title>
           <body>{children}</body>
         </html>
       </ThemeProvider>
