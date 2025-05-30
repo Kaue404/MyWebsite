@@ -156,7 +156,7 @@ export default function Page() {
             alt="Kauê José" 
             style={{ 
               width: '70%', 
-              height: '600px', 
+              height: '70%', 
               borderRadius: '1000px',
               objectFit: 'fill',
               boxShadow: '0 8px 32px 0 rgba(100, 51, 126, 0.35)',
