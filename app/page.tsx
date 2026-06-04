@@ -1,4 +1,7 @@
 import Plasma from "../components/Plasma"
+import Link from "next/link"
+import { Download, FolderOpen } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export default function Page() {
   return (
@@ -21,12 +24,51 @@ export default function Page() {
           </h1>
         </div>
       </section>
-      <section className="relative isolate flex min-h-[calc(100svh-4rem)] overflow-hidden border-t px-6 py-16 md:min-h-[calc(100svh-6rem)] md:px-10">
-        <div className="absolute inset-0 z-0">
-          <h2 className="text-2xl font-medium">
-            Aqui você pode encontrar meus projetos, habilidades e experiências
-            profissionais.
-          </h2>
+      <section
+        id="sobre"
+        className="flex min-h-[calc(100svh-4rem)] items-center justify-center border-t px-6 py-16 text-center md:min-h-[calc(100svh-6rem)] md:px-10"
+      >
+        <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6">
+          <div className="flex flex-col items-center gap-3">
+            <h2 className="text-3xl font-medium md:text-4xl">
+              Conheça meu trabalho
+            </h2>
+            <p className="max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
+              Acesse meus projetos ou baixe meu currículo para saber mais sobre
+              minha experiência e habilidades.
+            </p>
+          </div>
+
+          <div className="flex w-full max-w-2xl flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button asChild size="lg" className="w-full sm:w-auto">
+              <Link href="/#projetos">
+                <FolderOpen />
+                Ver projetos
+              </Link>
+            </Button>
+            <Button
+              asChild
+              variant="secondary"
+              size="lg"
+              className="w-full sm:w-auto"
+            >
+              <a href="/curriculos/cv-kaue.pdf" download>
+                <Download />
+                Baixar currículo
+              </a>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto"
+            >
+              <a href="/curriculos/cv-kaue-en.pdf" download>
+                <Download />
+                English CV
+              </a>
+            </Button>
+          </div>
         </div>
       </section>
     </>
