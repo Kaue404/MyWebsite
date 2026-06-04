@@ -1,6 +1,6 @@
 {
-  "name": "test",
-  "version": "0.0.1",
+  "name": "my-website",
+  "version": "2.0.0",
   "type": "module",
   "private": true,
   "scripts": {
@@ -17,6 +17,7 @@
     "lucide-react": "^1.17.0",
     "next": "16.2.6",
     "next-themes": "^0.4.6",
+    "ogl": "^1.0.11",
     "radix-ui": "^1.4.3",
     "react": "19.2.4",
     "react-dom": "19.2.4",
