@@ -174,13 +174,14 @@ export const Plasma = ({
     ro.observe(containerEl)
     setSize()
 
-    let raf = 0
     let contextLost = false
-    let isVisible = true
+    let isVisible = false
+    let raf = 0
     const t0 = performance.now()
 
     const loop = (t) => {
-      if (contextLost || !isVisible) return
+      raf = 0
+      if (contextLost || !isVisible || document.hidden) return
       let timeValue = (t - t0) * 0.001
       if (direction === "pingpong") {
         const pingpongDuration = 10
@@ -200,45 +201,87 @@ export const Plasma = ({
       raf = requestAnimationFrame(loop)
     }
 
+    const stopLoop = () => {
+      cancelAnimationFrame(raf)
+      raf = 0
+    }
+
+    const startLoop = () => {
+      if (raf || contextLost || !isVisible || document.hidden) return
+      setSize()
+      raf = requestAnimationFrame(loop)
+    }
+
+    const syncVisibility = () => {
+      const rect = containerEl.getBoundingClientRect()
+      isVisible =
+        !document.hidden &&
+        rect.width > 0 &&
+        rect.height > 0 &&
+        rect.bottom >= 0 &&
+        rect.right >= 0 &&
+        rect.top <= window.innerHeight &&
+        rect.left <= window.innerWidth
+
+      if (isVisible) {
+        startLoop()
+      } else {
+        stopLoop()
+      }
+    }
+
     const handleContextLost = (e) => {
       e.preventDefault()
       contextLost = true
-      cancelAnimationFrame(raf)
+      stopLoop()
     }
     const handleContextRestored = () => {
       contextLost = false
-      if (isVisible) {
-        cancelAnimationFrame(raf)
-        raf = requestAnimationFrame(loop)
-      }
+      syncVisibility()
     }
     canvas.addEventListener("webglcontextlost", handleContextLost)
     canvas.addEventListener("webglcontextrestored", handleContextRestored)
 
     const io = new IntersectionObserver(
       ([entry]) => {
-        const wasVisible = isVisible
-        isVisible = entry.isIntersecting
-        if (isVisible && !wasVisible && !contextLost) {
-          cancelAnimationFrame(raf)
-          raf = requestAnimationFrame(loop)
+        isVisible = entry.isIntersecting && !document.hidden
+        if (isVisible) {
+          startLoop()
+        } else {
+          stopLoop()
         }
       },
       { threshold: 0 }
     )
     io.observe(containerEl)
 
-    raf = requestAnimationFrame(loop)
+    window.addEventListener("focus", syncVisibility)
+    window.addEventListener("pageshow", syncVisibility)
+    window.addEventListener("popstate", syncVisibility)
+    window.addEventListener("hashchange", syncVisibility)
+    window.addEventListener("resize", syncVisibility)
+    document.addEventListener("visibilitychange", syncVisibility)
+
+    const visibilityInterval = window.setInterval(syncVisibility, 500)
+    syncVisibility()
 
     return () => {
-      cancelAnimationFrame(raf)
+      stopLoop()
       ro.disconnect()
       io.disconnect()
+      clearInterval(visibilityInterval)
+      window.removeEventListener("focus", syncVisibility)
+      window.removeEventListener("pageshow", syncVisibility)
+      window.removeEventListener("popstate", syncVisibility)
+      window.removeEventListener("hashchange", syncVisibility)
+      window.removeEventListener("resize", syncVisibility)
+      document.removeEventListener("visibilitychange", syncVisibility)
       canvas.removeEventListener("webglcontextlost", handleContextLost)
       canvas.removeEventListener("webglcontextrestored", handleContextRestored)
       if (mouseInteractive && containerEl) {
         containerEl.removeEventListener("mousemove", handleMouseMove)
       }
+      gl.getExtension("WEBGL_lose_context")?.loseContext()
       try {
         containerEl?.removeChild(canvas)
       } catch {}

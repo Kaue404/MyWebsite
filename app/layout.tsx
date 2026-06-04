@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Outfit } from "next/font/google"
 import "./globals.css"
 import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 
@@ -34,10 +35,13 @@ export default function RootLayout({
       )}
     >
       <title>Kauê Website</title>
-      <body>
+      <body className="min-h-svh">
         <ThemeProvider>
-          <Header />
-          <main className="pt-16 md:pt-22">{children}</main>
+          <div className="flex min-h-svh flex-col">
+            <Header />
+            <main className="flex-1 pt-16 md:pt-22">{children}</main>
+            <Footer />
+          </div>
         </ThemeProvider>
       </body>
     </html>

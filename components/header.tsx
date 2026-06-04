@@ -82,15 +82,68 @@ export function Header() {
   const [isOpen, setIsOpen] = React.useState(false)
 
   React.useEffect(() => {
-    function onScroll() {
-      setIsScrolled(window.scrollY > 16)
+    let frame = 0
+    let timeout = 0
+
+    function setScrolledStateFromWindow() {
+      const nextIsScrolled = window.scrollY > 16
+
+      setIsScrolled((currentIsScrolled) =>
+        currentIsScrolled === nextIsScrolled
+          ? currentIsScrolled
+          : nextIsScrolled
+      )
     }
 
-    onScroll()
-    window.addEventListener("scroll", onScroll, { passive: true })
+    function updateScrolledState() {
+      cancelAnimationFrame(frame)
+      setScrolledStateFromWindow()
+      frame = requestAnimationFrame(setScrolledStateFromWindow)
+    }
+
+    function updateScrolledStateAfterNavigation() {
+      updateScrolledState()
+      clearTimeout(timeout)
+      timeout = window.setTimeout(updateScrolledState, 120)
+    }
+
+    function onPageShow(event: PageTransitionEvent) {
+      if (event.persisted) {
+        window.location.reload()
+        return
+      }
+
+      updateScrolledStateAfterNavigation()
+    }
+
+    function onRestoreSignal() {
+      updateScrolledStateAfterNavigation()
+    }
+
+    updateScrolledState()
+    const interval = window.setInterval(setScrolledStateFromWindow, 250)
+    window.addEventListener("scroll", updateScrolledState, { passive: true })
+    window.addEventListener("resize", updateScrolledStateAfterNavigation)
+    window.addEventListener("focus", onRestoreSignal)
+    window.addEventListener("pageshow", onPageShow)
+    window.addEventListener("popstate", updateScrolledStateAfterNavigation)
+    window.addEventListener("hashchange", updateScrolledStateAfterNavigation)
+    document.addEventListener("visibilitychange", onRestoreSignal)
 
     return () => {
-      window.removeEventListener("scroll", onScroll)
+      cancelAnimationFrame(frame)
+      clearTimeout(timeout)
+      clearInterval(interval)
+      window.removeEventListener("scroll", updateScrolledState)
+      window.removeEventListener("resize", updateScrolledStateAfterNavigation)
+      window.removeEventListener("focus", onRestoreSignal)
+      window.removeEventListener("pageshow", onPageShow)
+      window.removeEventListener("popstate", updateScrolledStateAfterNavigation)
+      window.removeEventListener(
+        "hashchange",
+        updateScrolledStateAfterNavigation
+      )
+      document.removeEventListener("visibilitychange", onRestoreSignal)
     }
   }, [])
 
