@@ -10,8 +10,8 @@ import { cn } from "@/lib/utils"
 
 const navigationItems = [
   { label: "Sobre", href: "/sobre" },
-  { label: "Projetos", href: "/#projetos" },
-  { label: "Contato", href: "/#contato" },
+  { label: "Projetos", href: "/projetos" },
+  { label: "Contato", href: "#contato" },
 ]
 
 function subscribeToMountStore() {

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Download, FolderOpen, UserRound } from "lucide-react"
+import { Download, FolderOpen } from "lucide-react"
 import Plasma from "@/components/Plasma"
 import { Button } from "@/components/ui/button"
 
@@ -30,15 +30,11 @@ export function PanelHomeView() {
             <h2 className="text-3xl font-medium md:text-4xl">
               Conheça meu trabalho
             </h2>
-            <p className="max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
-              Acesse minha página sobre, meus projetos ou baixe meu currículo
-              para saber mais sobre minha experiência e habilidades.
-            </p>
           </div>
 
           <div className="flex w-full max-w-3xl flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
             <Button asChild size="lg" className="w-full sm:w-auto">
-              <Link href="/#projetos">
+              <Link href="/projetos">
                 <FolderOpen />
                 Ver projetos
               </Link>

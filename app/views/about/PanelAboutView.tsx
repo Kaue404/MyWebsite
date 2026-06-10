@@ -31,11 +31,11 @@ const journeySteps = [
 
 export function PanelAboutView() {
   return (
-    <section className="px-6 py-16 md:px-10 md:py-20">
+    <section className="px-6 pt-8">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-16">
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
           <div className="space-y-5">
-            <h1 className="text-4xl leading-tight font-bold text-primary md:text-5xl">
+            <h1 className="text-2xl leading-tight font-bold text-primary sm:text-4xl">
               Kauê José Abdalla Leal
             </h1>
             <p className="max-w-3xl text-base leading-8 text-muted-foreground md:text-lg">
@@ -64,16 +64,10 @@ export function PanelAboutView() {
           </div>
         </div>
 
-        <section aria-labelledby="journey-title" className="space-y-8">
-          <div className="space-y-3">
-            <h2
-              id="journey-title"
-              className="text-3xl leading-tight font-medium md:text-4xl"
-            >
-              Minha jornada
-            </h2>
-          </div>
-
+        <section aria-labelledby="journey-title" className="space-y-6 pb-6">
+          <h2 id="journey-title" className="sr-only">
+            Minha jornada
+          </h2>
           <ol className="space-y-6">
             {journeySteps.map((step, index) => (
               <li
@@ -82,7 +76,7 @@ export function PanelAboutView() {
               >
                 <div className="relative flex justify-center">
                   {index < journeySteps.length - 1 && (
-                    <span className="absolute top-[1.625rem] bottom-[calc(-1.5rem-1.625rem)] left-1/2 w-px -translate-x-1/2 bg-primary/35" />
+                    <span className="absolute top-6.5 -bottom-12.5 left-1/2 w-px -translate-x-1/2 bg-primary/35" />
                   )}
                   <span className="relative z-10 mt-5 size-3 rounded-full border-2 border-background bg-primary" />
                 </div>
