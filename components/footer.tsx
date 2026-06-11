@@ -1,11 +1,14 @@
+"use client"
+
 import Link from "next/link"
+import { useLanguage } from "@/components/language-provider"
 
 const pageLinks = [
-  { label: "Home", href: "/" },
-  { label: "Sobre", href: "/sobre" },
-  { label: "Contato", href: "#contato" },
-  { label: "Projetos", href: "/projetos" },
-]
+  { labelKey: "home", href: "/" },
+  { labelKey: "about", href: "/sobre" },
+  { labelKey: "contact", href: "/contato" },
+  { labelKey: "projects", href: "/projetos" },
+] as const
 
 const contactLinks = [
   {
@@ -59,8 +62,10 @@ function GithubIcon({ className }: IconProps) {
 }
 
 export function Footer() {
+  const { content } = useLanguage()
+
   return (
-    <footer id="contato" className="border-t bg-background/50">
+    <footer className="border-t bg-background/50">
       <div className="mx-auto flex w-full max-w-5xl flex-col items-center px-6 py-8 md:px-10">
         <div className="grid w-full gap-8 text-center sm:grid-cols-[1fr_1.25fr_1fr] sm:text-left">
           <section aria-labelledby="footer-pages-title">
@@ -68,9 +73,9 @@ export function Footer() {
               id="footer-pages-title"
               className="mb-3 text-xl leading-none font-semibold"
             >
-              Páginas
+              {content.footer.pagesTitle}
             </h2>
-            <nav aria-label="Links do rodapé">
+            <nav aria-label={content.footer.aria.pages}>
               <ul className="space-y-1 text-sm leading-tight">
                 {pageLinks.map((item) => (
                   <li key={item.href}>
@@ -78,7 +83,7 @@ export function Footer() {
                       href={item.href}
                       className="rounded-sm transition-colors outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                     >
-                      {item.label}
+                      {content.footer.links[item.labelKey]}
                     </Link>
                   </li>
                 ))}
@@ -91,7 +96,7 @@ export function Footer() {
               id="footer-contact-title"
               className="mb-3 text-xl leading-none font-semibold"
             >
-              Contato
+              {content.footer.contactTitle}
             </h2>
             <ul className="space-y-2 text-sm leading-tight">
               {contactLinks.map((item) => {
@@ -118,7 +123,7 @@ export function Footer() {
               id="footer-social-title"
               className="mb-3 text-xl leading-none font-semibold"
             >
-              Redes Sociais
+              {content.footer.socialTitle}
             </h2>
             <ul className="flex items-center justify-center gap-2 sm:justify-start">
               {socialLinks.map((item) => {
@@ -154,7 +159,7 @@ export function Footer() {
         </div>
 
         <p className="mt-8 text-center text-sm leading-none">
-          © 2026 Kauê José Abdalla Leal
+          {content.footer.copyright}
         </p>
       </div>
     </footer>

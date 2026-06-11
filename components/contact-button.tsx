@@ -1,7 +1,9 @@
+"use client"
+
 import type { ComponentProps } from "react"
 import Link from "next/link"
 import { MessageCircle } from "lucide-react"
-
+import { useLanguage } from "@/components/language-provider"
 import { Button } from "@/components/ui/button"
 
 type ContactButtonProps = {
@@ -15,11 +17,13 @@ export function ContactButton({
   variant = "default",
   size = "lg",
 }: ContactButtonProps) {
+  const { content } = useLanguage()
+
   return (
     <Button asChild variant={variant} size={size} className={className}>
-      <Link href="#contato">
+      <Link href="/contato">
         <MessageCircle />
-        Entrar em contato
+        {content.contactButton.label}
       </Link>
     </Button>
   )

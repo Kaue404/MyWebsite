@@ -3,16 +3,25 @@
 import Image from "next/image"
 import Link from "next/link"
 import * as React from "react"
-import { Menu, Moon, Sun, X } from "lucide-react"
+import { Check, Ellipsis, Languages, Menu, Moon, Sun, X } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
+import { useLanguage } from "@/components/language-provider"
+import { languageOptions, type Language } from "@/lib/translations"
 import { cn } from "@/lib/utils"
 
 const navigationItems = [
-  { label: "Sobre", href: "/sobre" },
-  { label: "Projetos", href: "/projetos" },
-  { label: "Contato", href: "#contato" },
-]
+  { labelKey: "about", href: "/sobre" },
+  { labelKey: "projects", href: "/projetos" },
+  { labelKey: "contact", href: "/contato" },
+] as const
+
+const themeOptions = [
+  { value: "light", icon: Sun },
+  { value: "dark", icon: Moon },
+] as const
+
+type ThemeOption = (typeof themeOptions)[number]["value"]
 
 function subscribeToMountStore() {
   return () => {}
@@ -34,50 +43,146 @@ function useHasMounted() {
   )
 }
 
-function ThemeToggleButton({ className }: { className?: string }) {
+function PreferencesMenuButton({ className }: { className?: string }) {
   const { resolvedTheme, setTheme } = useTheme()
+  const { language, setLanguage, content } = useLanguage()
   const hasMounted = useHasMounted()
+  const [isOpen, setIsOpen] = React.useState(false)
+  const menuRef = React.useRef<HTMLDivElement>(null)
 
-  const isDark = hasMounted && resolvedTheme === "dark"
+  const currentTheme: ThemeOption =
+    hasMounted && resolvedTheme === "dark" ? "dark" : "light"
+  const preferences = content.header.preferences
+
+  React.useEffect(() => {
+    if (!isOpen) {
+      return
+    }
+
+    function onPointerDown(event: PointerEvent) {
+      if (!menuRef.current?.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener("pointerdown", onPointerDown)
+    window.addEventListener("keydown", onKeyDown)
+
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown)
+      window.removeEventListener("keydown", onKeyDown)
+    }
+  }, [isOpen])
+
+  function selectTheme(nextTheme: ThemeOption) {
+    setTheme(nextTheme)
+    setIsOpen(false)
+  }
+
+  function selectLanguage(nextLanguage: Language) {
+    setLanguage(nextLanguage)
+    setIsOpen(false)
+  }
 
   return (
-    <Button
-      type="button"
-      variant="ghost"
-      size="icon"
-      className={cn(className, "cursor-pointer")}
-      aria-label={
-        hasMounted
-          ? isDark
-            ? "Ativar modo claro"
-            : "Ativar modo escuro"
-          : "Alternar tema"
-      }
-      onClick={() => setTheme(isDark ? "light" : "dark")}
-    >
-      <span className="grid place-items-center">
-        <Sun
-          className={cn(
-            "col-start-1 row-start-1 transition-all",
-            isDark
-              ? "scale-100 rotate-0 opacity-100"
-              : "scale-0 -rotate-90 opacity-0"
-          )}
-        />
-        <Moon
-          className={cn(
-            "col-start-1 row-start-1 transition-all",
-            hasMounted && !isDark
-              ? "scale-100 rotate-0 opacity-100"
-              : "scale-0 rotate-90 opacity-0"
-          )}
-        />
-      </span>
-    </Button>
+    <div ref={menuRef} className={cn("relative", className)}>
+      <Button
+        type="button"
+        variant="ghost"
+        size="icon"
+        className="cursor-pointer"
+        aria-label={preferences.trigger}
+        aria-haspopup="menu"
+        aria-expanded={isOpen}
+        onClick={() => setIsOpen((current) => !current)}
+      >
+        <Ellipsis />
+      </Button>
+
+      {isOpen && (
+        <div
+          role="menu"
+          aria-label={preferences.title}
+          className="absolute top-full right-0 z-50 mt-2 w-64 rounded-[8px] border bg-popover p-2 text-popover-foreground shadow-lg shadow-black/10"
+        >
+          <div className="px-2 py-1 text-xs font-medium tracking-normal text-muted-foreground uppercase">
+            {preferences.theme}
+          </div>
+          <div className="space-y-1">
+            {themeOptions.map((option) => {
+              const Icon = option.icon
+              const isSelected = currentTheme === option.value
+              const label =
+                option.value === "light"
+                  ? preferences.lightTheme
+                  : preferences.darkTheme
+
+              return (
+                <button
+                  key={option.value}
+                  type="button"
+                  role="menuitemradio"
+                  aria-checked={isSelected}
+                  className="flex h-9 w-full items-center justify-between rounded-[8px] px-2.5 text-sm transition-colors outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/50"
+                  onClick={() => selectTheme(option.value)}
+                >
+                  <span className="flex items-center gap-2">
+                    <Icon className="size-4" />
+                    {label}
+                  </span>
+                  {isSelected && <Check className="size-4 text-primary" />}
+                </button>
+              )
+            })}
+          </div>
+
+          <div className="mt-2 border-t pt-2">
+            <div className="flex items-center gap-2 px-2 py-1 text-xs font-medium tracking-normal text-muted-foreground uppercase">
+              <Languages className="size-3.5" />
+              {preferences.language}
+            </div>
+            <div className="space-y-1">
+              {languageOptions.map((option) => {
+                const isSelected = language === option.value
+
+                return (
+                  <button
+                    key={option.value}
+                    type="button"
+                    role="menuitemradio"
+                    aria-checked={isSelected}
+                    className="flex h-9 w-full items-center justify-between rounded-[8px] px-2.5 text-sm transition-colors outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/50"
+                    onClick={() => selectLanguage(option.value)}
+                  >
+                    <span className="flex items-center gap-2">
+                      <Languages className="size-4" />
+                      <span>{option.label}</span>
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <span className="text-xs font-medium text-muted-foreground">
+                        {option.shortLabel}
+                      </span>
+                      {isSelected && <Check className="size-4 text-primary" />}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
 
 export function Header() {
+  const { content } = useLanguage()
   const [isScrolled, setIsScrolled] = React.useState(false)
   const [isOpen, setIsOpen] = React.useState(false)
 
@@ -184,17 +289,17 @@ export function Header() {
       >
         <nav
           className="flex items-center justify-between gap-4"
-          aria-label="Navegação principal"
+          aria-label={content.header.aria.mainNavigation}
         >
           <Link
             href="/"
             className="flex shrink-0 items-center gap-3 rounded-md transition-opacity outline-none hover:opacity-85 focus-visible:ring-3 focus-visible:ring-ring/50"
-            aria-label="Ir para a página inicial"
+            aria-label={content.header.aria.home}
             onClick={() => setIsOpen(false)}
           >
             <Image
               src="/logo.png"
-              alt="Logo do site"
+              alt={content.header.aria.logoAlt}
               width={48}
               height={48}
               priority
@@ -208,20 +313,24 @@ export function Header() {
           <div className="hidden items-center gap-1 md:flex">
             {navigationItems.map((item) => (
               <Button key={item.href} asChild variant="ghost" size="sm">
-                <Link href={item.href}>{item.label}</Link>
+                <Link href={item.href}>
+                  {content.header.navigation[item.labelKey]}
+                </Link>
               </Button>
             ))}
-            <ThemeToggleButton />
+            <PreferencesMenuButton />
           </div>
 
           <div className="flex items-center gap-1 md:hidden">
-            <ThemeToggleButton />
+            <PreferencesMenuButton />
             <Button
               type="button"
               variant="ghost"
               size="icon"
               aria-label={
-                isOpen ? "Fechar menu de navegação" : "Abrir menu de navegação"
+                isOpen
+                  ? content.header.aria.closeMobileMenu
+                  : content.header.aria.openMobileMenu
               }
               aria-controls="mobile-navigation"
               aria-expanded={isOpen}
@@ -248,7 +357,7 @@ export function Header() {
                 className="justify-start"
               >
                 <Link href={item.href} onClick={() => setIsOpen(false)}>
-                  {item.label}
+                  {content.header.navigation[item.labelKey]}
                 </Link>
               </Button>
             ))}

@@ -3,6 +3,7 @@ import "./globals.css"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
+import { LanguageProvider } from "@/components/language-provider"
 import { cn } from "@/lib/utils"
 
 const outfitHeading = Outfit({
@@ -37,11 +38,13 @@ export default function RootLayout({
       <title>Kauê Website</title>
       <body className="min-h-svh">
         <ThemeProvider>
-          <div className="flex min-h-svh flex-col">
-            <Header />
-            <main className="flex-1 pt-16 md:pt-22">{children}</main>
-            <Footer />
-          </div>
+          <LanguageProvider>
+            <div className="flex min-h-svh flex-col">
+              <Header />
+              <main className="flex-1 pt-16 md:pt-22">{children}</main>
+              <Footer />
+            </div>
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
