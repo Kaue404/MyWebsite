@@ -1,54 +1,27 @@
-'use client';
+"use client"
 
-import { Container, Typography } from '@mui/material';
-import Button from './components/button';
-import Image from 'next/image';
-import React from 'react';
+import Plasma from "@/components/Plasma"
+import { useLanguage } from "@/components/language-provider"
 
-const Custom404: React.FC = () => {
+export default function NotFound() {
+  const { content } = useLanguage()
+
   return (
-    <Container
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100vh',
-        textAlign: 'center',
-      }}>
-      <div
-        style={{
-          opacity: 0.2,
-          position: 'absolute', 
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: -1,
-        }}>
-        <Image
-          src="/images/Background.jpg"
-          alt="Fundo"
-          fill
-          objectFit="cover"
+    <section className="fixed inset-0 isolate z-60 flex min-h-svh items-center justify-center overflow-hidden bg-background px-6 text-center">
+      <div className="absolute inset-0 z-0">
+        <Plasma
+          color="#7008e7"
+          speed={0.3}
+          direction="forward"
+          scale={1.5}
+          opacity={1}
+          mouseInteractive
         />
       </div>
-      <Typography variant="h1" 
-        sx={{ fontSize: '4rem', fontWeight: 'bold', mb: 2 }}>
-        404
-      </Typography>
-      <Typography variant="h4" sx={{ mb: 3 }}>
-        Página não encontrada
-      </Typography>
-      <Typography variant="body1" sx={{ mb: 4 }}>
-        A página que você está procurando
-        pode ter sido removida ou não está disponível.
-      </Typography>
-      <Button href="/">
-          Voltar para a página inicial
-      </Button>
-    </Container>
-  );
-};
-
-export default Custom404;
+      <div className="absolute inset-0 z-1 bg-background/35 dark:bg-background/25" />
+      <h1 className="relative z-10 text-4xl leading-tight font-medium sm:text-5xl md:text-6xl">
+        {content.notFound.heading}
+      </h1>
+    </section>
+  )
+}

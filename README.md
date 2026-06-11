@@ -6,8 +6,8 @@ Welcome to my personal portfolio! This website was developed to showcase my skil
 
 ## ⚙ Technologies Used ⚙
 
-- **Next.TS**: Content structuring of the site and for interactivity and dynamic functionalities.
-- **Material UI**: Styling, responsive design and to facilitate responsive design and pre-styled components.
+- **Next.JS**: Content structuring of the site and for interactivity and dynamic functionalities.
+- **Shadcn & TailwindCSS**: Styling, responsive design and to facilitate responsive design and pre-styled components.
 - **Git & GitHub**: Version control and source code hosting.
 
 ## 💫 Website Sections 💫
