@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono, Outfit } from "next/font/google"
+import type { Metadata } from "next"
 import "./globals.css"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -18,6 +19,10 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
+export const metadata: Metadata = {
+  title: "Kauê Website",
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,6 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={cn(
         "antialiased",
@@ -35,8 +41,7 @@ export default function RootLayout({
         outfitHeading.variable
       )}
     >
-      <title>Kauê Website</title>
-      <body className="min-h-svh">
+      <body className="min-h-svh" suppressHydrationWarning>
         <ThemeProvider>
           <LanguageProvider>
             <div className="flex min-h-svh flex-col">
